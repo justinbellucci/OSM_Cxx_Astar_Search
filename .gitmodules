@@ -1,0 +1,3 @@
+[submodule "thirdparty/P0267_RefImpl"]
+	path = thirdparty/P0267_RefImpl
+	url = https://github.com/cpp-io2d/P0267_RefImpl
