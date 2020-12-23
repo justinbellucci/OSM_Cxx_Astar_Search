@@ -13,7 +13,10 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, floa
 
     start_node = &m_Model.FindClosestNode(start_x, start_y);
     end_node = &m_Model.FindClosestNode(end_x, end_y);
-    std::cout << "start node: " << start_node << "\n";
+
+    // just some tests to help understand pointers and dereferance operators
+    std::cout << "start node: " <<  (*start_node).x << "\n";
+    std::cout << "start node: " << (*start_node).visited << "\n";
 }
 
 
@@ -23,7 +26,8 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, floa
 // - Node objects have a distance method to determine the distance to another node.
 
 float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
-
+    // return (*node).distance(*end_node); // de-reference operator usesd
+    return node->distance(*end_node); // same as above but sexier
 }
 
 
