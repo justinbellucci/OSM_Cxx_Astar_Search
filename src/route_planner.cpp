@@ -47,10 +47,10 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
         neighbor->h_value = CalculateHValue(neighbor);
 
         // add neighbor to open_list
-        open_list.push_back(neighbor);
+        open_list.emplace_back(neighbor);
         // set the node to visited
         neighbor->visited = true;
-        std::cout << "--- G-Val: " << neighbor->g_value << "\n";
+        // std::cout << "--- G-Val: " << neighbor->g_value << "\n";
     }
 }
 
@@ -62,10 +62,18 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
 // - Remove that node from the open_list.
 // - Return the pointer.
 
+// bool compareFval(RouteModel::Node *a, RouteModel::Node *b) {
+//         float fval_a = a->g_value + a->h_value;
+//         float fval_b = b->g_value + b->h_value;
+//         return fval_a < fval_b;
+//     }
+    
 RouteModel::Node *RoutePlanner::NextNode() {
+    // std::sort(open_list.begin(), open_list.end(), compareFval);
 
     // sort function by smallest f_value
-    std::sort(open_list.begin(), open_list.end(), [](auto &lhs, auto &rhs) {
+
+    std::sort(open_list.begin(), open_list.end(), [](RouteModel::Node *lhs, RouteModel::Node *rhs) {
         return (lhs->g_value + lhs->h_value < rhs->g_value + rhs->h_value);
     });
 
@@ -133,6 +141,22 @@ void RoutePlanner::AStarSearch() {
     RouteModel::Node *current_node = nullptr;
     
     // TODO: Implement your solution here.
-    // Construct start_node and end_node as in the model.
-    
+    // add start_node to open_list and set to visted
+    open_list.push_back(start_node);
+    start_node->visited = true;
+    // while open_list has elements in it
+    while (open_list.size() > 0) {
+        // current node == node with lowest f_value 
+        current_node = NextNode();
+        // if current node is end goal return model path
+        if (current_node->distance(*end_node) == 0) {
+            m_Model.path = ConstructFinalPath(current_node);
+            return;
+        } 
+        // else add neighbors to open_list
+        else {
+            AddNeighbors(current_node);
+        }
+    }
+        
 }
