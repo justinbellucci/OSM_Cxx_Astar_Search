@@ -66,13 +66,15 @@ RouteModel::Node *RoutePlanner::NextNode() {
 
     // sort function by smallest f_value
     std::sort(open_list.begin(), open_list.end(), [](auto &lhs, auto &rhs) {
-        return (lhs->g_value + lhs->h_value < rhs->g_value + lhs->h_value);
+        return (lhs->g_value + lhs->h_value < rhs->g_value + rhs->h_value);
     });
 
-    // create pointer to the node with the lowest f_value
+    // create pointer to the node with the lowest f_value. 
+    // Note: list::front returns a direct referance
     RouteModel::Node *node_low_fval = open_list.front();
 
-    // remove element by position
+    // remove element by position. 
+    // Note: list::begin returns an iterator
     open_list.erase(open_list.begin());
 
     // return the pointer to the node with the lowest f_val
@@ -91,9 +93,28 @@ RouteModel::Node *RoutePlanner::NextNode() {
 std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node) {
     // Create path_found vector
     distance = 0.0f;
-    std::vector<RouteModel::Node> path_found;
+    std::vector<RouteModel::Node> path_found{};
 
     // TODO: Implement your solution here.
+    RouteModel::Node parent_node;
+
+    // go from the current node to the start where the parent is a null pointer.
+    while (current_node->parent != nullptr) {
+
+        // dereference and add the current node to the end of the path vector
+        path_found.push_back(*current_node);
+        // dereference the current nodes parent and set equal to parent node
+        parent_node = *(current_node->parent);
+        // calculate distance from current node to parent
+        distance += current_node->distance(parent_node);
+        // set parent to current node
+        current_node = current_node->parent;
+
+    }
+    // need to add the last current node to the path
+    path_found.push_back(*current_node);
+    // reverse the vector
+    std::reverse(path_found.begin(), path_found.end());
 
     distance *= m_Model.MetricScale(); // Multiply the distance by the scale of the map to get meters.
     return path_found;
