@@ -45,7 +45,7 @@ RouteModel::Node *RoutePlanner::NextNode() {
 }
 
 /* Iteratively follow the chain of parent nodes until the starting node is found. Add
-   the nodes to the path_found vector and sum the total distanc. The return vector is 
+   the nodes to the path_found vector and sum the total distance. The return vector is 
    reversed so the path can be recreated from start to end. */
 std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node) {
     distance = 0.0f;
