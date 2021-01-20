@@ -1,8 +1,7 @@
-# Route Planning Project
+# OpenStreet Map Route Planning Project - Astar
 
-This repo contains the starter code for the Route Planning project.
 
-<img src="map.png" width="600" height="450" />
+<img src="map1.png" width="800" height="400" />
 
 ## Cloning
 
