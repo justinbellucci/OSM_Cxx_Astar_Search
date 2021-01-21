@@ -33,7 +33,7 @@ Delete the `P0267_Reflmpl` directory in the `thirdparty` folder. This will ensur
 * gcc/g++/clang = 12.0.0
   * Mac: same instructions as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
 * IO2D  
-  Installation instructions other operating systems can be found [here](https://github.com/cpp-io2d/P0267_RefImpl/blob/master/BUILDING.md). Please follow thes instructions when installing on a Mac. 
+  Installation instructions for other operating systems can be found [here](https://github.com/cpp-io2d/P0267_RefImpl/blob/master/BUILDING.md). Please follow thes instructions when installing on a Mac. 
   * `cd` to `thirdparty` folder. You can clone the IO2D library by adding a submodule or simply by cloning the repo. 
     ```
     git submodule add https://github.com/cpp-io2d/P0267_RefImpl
