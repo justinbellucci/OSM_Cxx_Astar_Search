@@ -87,7 +87,7 @@ To compile the project, first, create a `build` directory and change to that dir
 ```
 mkdir build && cd build
 ```
-From within the `build` directory, then run `cmake` and `make` as follows:
+From within the `build` directory, run `cmake` and `make` as follows:
 ```
 cmake ..
 make
